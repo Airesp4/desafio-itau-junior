@@ -1,7 +1,6 @@
 package com.itau.transaction_challenge.repository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.itau.transaction_challenge.model.Transacao;
@@ -27,7 +26,7 @@ public class TransacaoRepository {
     }
 
     public List<Transacao> listarTransacoes() {
-        return Collections.unmodifiableList(transacoes);
+        return transacoes;
     }
 
     public void limparTransacoes(){

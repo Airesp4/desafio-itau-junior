@@ -15,6 +15,7 @@ import com.itau.transaction_challenge.repository.TransacaoRepository;
 public class EstatisticaService {
     
     public List<Transacao> filtraTransacoes(){
+
         var estatisticas = TransacaoRepository.getInstance().listarTransacoes();
 
         OffsetDateTime dateTimeNow = OffsetDateTime.now();
@@ -23,6 +24,7 @@ public class EstatisticaService {
                 .filter(transacao -> Duration.between(transacao.getDataHora(), dateTimeNow).getSeconds() <= 60)
                 .collect(Collectors.toList());
     }
+    
     public EstatisticaDTO pegaEstatistica(){                
         
         List<Transacao> transacoesFiltradas = filtraTransacoes();
@@ -34,6 +36,10 @@ public class EstatisticaService {
 
         double avg = sum/count;
 
+        if (count == 0) {
+            avg = 0.0;
+        }
+        
         double min = transacoesFiltradas.stream()
             .mapToDouble(Transacao::getValor)
             .min()
