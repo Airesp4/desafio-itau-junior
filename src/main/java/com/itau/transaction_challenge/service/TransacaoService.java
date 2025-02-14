@@ -24,4 +24,9 @@ public class TransacaoService {
 
         TransacaoRepository.getInstance().adicionarTransacao(transacao);
     }
+
+    public void deletarTransacoes(){
+
+        TransacaoRepository.getInstance().limparTransacoes();
+    }
 }

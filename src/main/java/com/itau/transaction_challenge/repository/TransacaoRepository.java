@@ -29,4 +29,9 @@ public class TransacaoRepository {
     public List<Transacao> listarTransacoes() {
         return Collections.unmodifiableList(transacoes);
     }
+
+    public void limparTransacoes(){
+        
+        transacoes.clear();
+    }
 }
