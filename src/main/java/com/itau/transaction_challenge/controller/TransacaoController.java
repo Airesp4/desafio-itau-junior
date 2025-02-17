@@ -15,6 +15,9 @@ import com.itau.transaction_challenge.model.Transacao;
 import com.itau.transaction_challenge.service.EstatisticaService;
 import com.itau.transaction_challenge.service.TransacaoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 @RestController
@@ -27,6 +30,12 @@ public class TransacaoController {
     private EstatisticaService estatisticaService;
 
     @PostMapping("/transacao")
+    @Operation(summary = "Registra uma transação", description = "Valida e registra uma transação com informações de valor e data.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Transação registrada!"),
+        @ApiResponse(responseCode = "400", description = "Dados inválidos!"),
+        @ApiResponse(responseCode = "422", description = "Erro ao registar transação.")
+    })
     public ResponseEntity<Void> receberTransacao(@RequestBody @Valid TransacaoDTO transacaoDTO) {
         try {
             Transacao novaTransacao = new Transacao(transacaoDTO);
@@ -43,6 +52,10 @@ public class TransacaoController {
     }
 
     @DeleteMapping("/transacao")
+    @Operation(summary = "Deleta transações", description = "Apaga todos os registros de transações salvos.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Registros de transações deletados!")
+    })
     public ResponseEntity<Void> limparTransacoes(){
 
         transacaoService.deletarTransacoes();
@@ -51,9 +64,13 @@ public class TransacaoController {
     }
 
     @GetMapping("/estatistica")
+    @Operation(summary = "Gera estatísticas", description = "Disponibiliza dados de estatísticas de transações realizadas nos últimos 60 segundos.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Informações de estatísticas gerados com sucesso!")
+    })
     public ResponseEntity<EstatisticaDTO> calcularEstatisticas(){
 
-        EstatisticaDTO estatistica = estatisticaService.pegaEstatistica();
+        EstatisticaDTO estatistica = estatisticaService.geraEstatistica();
 
         return ResponseEntity.ok().body(estatistica);
     }

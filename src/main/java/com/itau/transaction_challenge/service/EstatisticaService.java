@@ -25,7 +25,7 @@ public class EstatisticaService {
                 .collect(Collectors.toList());
     }
     
-    public EstatisticaDTO pegaEstatistica(){                
+    public EstatisticaDTO geraEstatistica(){                
         
         List<Transacao> transacoesFiltradas = filtraTransacoes();
 
