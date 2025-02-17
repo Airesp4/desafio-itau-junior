@@ -36,7 +36,8 @@ public class EstatisticaService {
     }
     
     public EstatisticaDTO geraEstatistica(){                
-        
+        long startTime = System.nanoTime();
+
         List<Transacao> transacoesFiltradas = filtraTransacoes();
 
         logger.info("Filtrando transações: {}", transacoesFiltradas);
@@ -62,8 +63,14 @@ public class EstatisticaService {
             .max()
             .orElse(0.0);
         
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1_000_000;
+        
+        
         logger.info("Gerando estatísticas - Contagem: {}, Soma: {}, Média: {}, Mínimo: {}, Máximo: {}", 
             count, sum, avg, min, max);
+        
+        logger.info("As estatísticas foram geradas em {} ms", duration);
         
         return new EstatisticaDTO(count, sum, avg, min, max);
     }
