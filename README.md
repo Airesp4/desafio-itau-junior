@@ -6,6 +6,9 @@ Este repositório contém a solução para o desafio de programação proposto p
 - Calcular estatísticas das transações que aconteceram nos últimos 60 segundos;
 - Limpar todas as transações armazenadas;
 - Validação de regras de negócio para aceitação de transações.
+  
+## Link do Desafio: 
+https://github.com/rafaellins-itau/desafio-itau-vaga-99-junior
 
 ## Estrutura do Projeto
 
@@ -109,7 +112,7 @@ mvn test
 
 ## Tecnologias Utilizadas
 
-- **Java 17** ou superior
+- **Java 17**
 - **Spring Boot**
 - **JUnit 5** (para testes automatizados)
 - **Maven** (para gerenciamento de dependências)
